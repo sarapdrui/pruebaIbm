@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class ProvidersServiceImpl implements ProvidersService {
 
     ProvidersRepository providersRepository;
