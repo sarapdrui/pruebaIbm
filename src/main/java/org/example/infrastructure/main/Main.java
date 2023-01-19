@@ -23,7 +23,7 @@ public class Main {
         int idCliente = Integer.parseInt(args[0]);
 
         try {
-            providersService.getProviders(idCliente);
+            providersService.exportProviders(idCliente);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

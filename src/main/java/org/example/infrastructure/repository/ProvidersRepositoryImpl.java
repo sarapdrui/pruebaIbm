@@ -1,27 +1,28 @@
 package org.example.infrastructure.repository;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.example.appication.repository.ProvidersRepository;
-import org.springframework.stereotype.Repository;
+import org.example.domain.Provider;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-@Repository
-@Slf4j
-@RequiredArgsConstructor
+
 public class ProvidersRepositoryImpl implements ProvidersRepository {
     @Override
-    public ArrayList<String> getProviders(int clientId) {
+    public ArrayList<Provider> getProviders(int clientId) {
         Connection con = null;
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/providers", "root", "admin");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT idProvider, name, dischargeDate FROM provider WHERE idClient = " + clientId);
-            ArrayList<String> providers = new ArrayList<>();
+            ResultSet rs = st.executeQuery("SELECT * FROM provider WHERE idClient = " + clientId);
+            ArrayList<Provider> providers = new ArrayList<>();
             while (rs.next()) {
-                providers.add(rs.getInt("idProvider") + "," + rs.getString("name") + "," + rs.getDate("dischargeDate"));
+                Provider provider = new Provider();
+                provider.setId(rs.getInt("idProvider"));
+                provider.setName(rs.getString("name"));
+                provider.setDischargeDate(rs.getDate("dischargeDate"));
+                provider.setClientId(rs.getInt("idClient"));
+                providers.add(provider);
             }
             return providers;
         } catch (SQLException e) {
