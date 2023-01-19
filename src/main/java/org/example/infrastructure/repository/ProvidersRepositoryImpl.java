@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class ProvidersRepositoryImpl implements ProvidersRepository {
     @Override
-    public ArrayList<Provider> getProviders(int clientId) {
+    public ArrayList<Provider> getProviders(int clientId, String localhost, int port, String user, String password) {
         Connection con = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/providers", "root", "admin");
+            con = DriverManager.getConnection("jdbc:mysql://" + localhost+ ":"+ port + "/providers", user, password);
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM provider WHERE idClient = " + clientId);
             ArrayList<Provider> providers = new ArrayList<>();

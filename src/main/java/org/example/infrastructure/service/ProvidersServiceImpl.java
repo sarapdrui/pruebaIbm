@@ -17,8 +17,8 @@ public class ProvidersServiceImpl implements ProvidersService {
     }
 
     @Override
-    public void exportProviders(int id) throws IOException {
-        List<Provider> providersList = providersRepository.getProviders(id);
+    public void exportProviders(int id, String localhost, int port, String user, String password) throws IOException {
+        List<Provider> providersList = providersRepository.getProviders(id, localhost, port, user, password);
 
 
         if (providersList.size() > 0) {
