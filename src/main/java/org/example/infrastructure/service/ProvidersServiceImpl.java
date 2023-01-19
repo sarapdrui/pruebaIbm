@@ -1,6 +1,5 @@
 package org.example.infrastructure.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.appication.repository.ProvidersRepository;
 import org.example.appication.service.ProvidersService;
@@ -15,6 +14,10 @@ import java.util.List;
 public class ProvidersServiceImpl implements ProvidersService {
 
     ProvidersRepository providersRepository;
+
+    public ProvidersServiceImpl (ProvidersRepository providersRepository){
+        this.providersRepository = providersRepository;
+    }
 
     @Override
     public void getProviders(int id) throws IOException {

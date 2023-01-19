@@ -16,12 +16,12 @@ public class ProvidersRepositoryImpl implements ProvidersRepository {
     public ArrayList<String> getProviders(int clientId) {
         Connection con = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://host:port/dbname", "username", "password");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/providers", "root", "admin");
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT idProvider, name, dischargeDate FROM provider WHERE idClient = " + clientId);
             ArrayList<String> providers = new ArrayList<>();
             while (rs.next()) {
-                providers.add(rs.getInt("idProvider") + "," + rs.getString("name") + "," + rs.getDate("fecha_alta"));
+                providers.add(rs.getInt("idProvider") + "," + rs.getString("name") + "," + rs.getDate("dischargeDate"));
             }
             return providers;
         } catch (SQLException e) {
